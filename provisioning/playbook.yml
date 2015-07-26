@@ -1,0 +1,15 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    - name: ensure ntpd is at the latest version
+      apt: pkg=ntp state=latest
+      notify:
+      - restart ntpd
+    - name: apt update
+      apt: update_cache=yes
+    - name: nginx
+      apt: name=nginx state=lates update_cache=yes
+  handlers:
+    - name: restart ntpd
+      service: name=ntpd state=restarted
