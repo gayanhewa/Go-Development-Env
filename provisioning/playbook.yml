@@ -6,7 +6,7 @@
 
     - name: Add the goland repo
       apt_repository: repo='ppa:gophers/go' update_cache=yes
-      
+
     - name: Install golang
       apt: name=golang
 
@@ -14,3 +14,9 @@
       apt: name={{ item }} state=latest
       with_items:
         - git
+
+    - name: create /home/vagrant/go directory
+      file: dest=/home/vagrant/go state=directory owner=vagrant group=vagrant mode=0700
+
+    - name: Add the Gopath variable
+      shell: export GOPATH=$HOME/go/project
