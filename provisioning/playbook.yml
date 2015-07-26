@@ -1,15 +1,16 @@
 ---
 - hosts: all
   sudo: yes
+
   tasks:
-    - name: ensure ntpd is at the latest version
-      apt: pkg=ntp state=latest
-      notify:
-      - restart ntpd
-    - name: apt update
-      apt: update_cache=yes
-    - name: nginx
-      apt: name=nginx state=lates update_cache=yes
-  handlers:
-    - name: restart ntpd
-      service: name=ntpd state=restarted
+
+    - name: Add the goland repo
+      apt_repository: repo='ppa:gophers/go' update_cache=yes
+      
+    - name: Install golang
+      apt: name=golang
+
+    - name: Install other packages
+      apt: name={{ item }} state=latest
+      with_items:
+        - git
