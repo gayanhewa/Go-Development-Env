@@ -17,10 +17,10 @@ The VM gets a the IP defined in the Vagrant file assigned.
 
 The sync directory with the VM is located at,
 
-    ```
+ 
 
         config.vm.synced_folder "~/Workspace/go-project", "/home/vagrant/go/project"
 
-    ```
+ 
 
 - The provisioning scripts are still immature, but you can hack and fix any issues if you are brave. Don't forget to send a pull request if you do.
